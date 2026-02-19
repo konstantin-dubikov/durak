@@ -25,12 +25,12 @@ pub struct Card {
     value: CardValue,
 }
 
-static card_suits : [CardSuit; 4] = [CardSuit::Hearts,
+const CARD_SUITS : [CardSuit; 4] = [CardSuit::Hearts,
                                  CardSuit::Diamonds,
                                  CardSuit::Spades,
                                  CardSuit::Clubs];
 
-static card_values : [CardValue; 9] = [CardValue::Six,
+const CARD_VALUES : [CardValue; 9] = [CardValue::Six,
                                    CardValue::Seven,
                                    CardValue::Eight,
                                    CardValue::Nine,
@@ -43,8 +43,8 @@ static card_values : [CardValue; 9] = [CardValue::Six,
 pub fn get_cards() -> Vec<Card> {
     let mut cards : Vec<Card> = Vec::new();
 
-    for card_suit in card_suits.clone() {
-        for card_value in card_values.clone() {
+    for card_suit in CARD_SUITS {
+        for card_value in CARD_VALUES {
             cards.push(Card {
                 suit : card_suit.clone(),
                 value : card_value.clone(),
