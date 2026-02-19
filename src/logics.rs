@@ -1,3 +1,5 @@
+use rand::prelude::*;
+
 #[derive(Debug, Clone)]
 pub enum CardSuit {
     Hearts,
@@ -40,16 +42,32 @@ const CARD_VALUES : [CardValue; 9] = [CardValue::Six,
                                    CardValue::King,
                                    CardValue::Ace];
 
-pub fn get_cards() -> Vec<Card> {
-    let mut cards : Vec<Card> = Vec::new();
+pub fn get_card_deck() -> Vec<Card> {
+    let mut card_deck : Vec<Card> = Vec::new();
 
     for card_suit in CARD_SUITS {
         for card_value in CARD_VALUES {
-            cards.push(Card {
+            card_deck.push(Card {
                 suit : card_suit.clone(),
                 value : card_value.clone(),
             });
         } 
     }
-    cards
+    card_deck
 }
+
+pub fn get_random_card_deck() -> Vec<Card> {
+    let mut random_card_deck : Vec<Card> = get_card_deck();
+    let mut rng = rand::rng();
+    
+    random_card_deck.shuffle(&mut rng);
+
+    random_card_deck
+}
+
+
+
+
+
+
+
