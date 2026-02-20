@@ -65,9 +65,8 @@ pub fn get_random_card_deck() -> Vec<Card> {
     random_card_deck
 }
 
+pub fn get_trump_suit() -> CardSuit {
+    let mut rng = rand::rng();
 
-
-
-
-
-
+    CARD_SUITS[rng.random_range(0..=3)].clone()
+}
