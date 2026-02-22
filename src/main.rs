@@ -1,3 +1,7 @@
+//TODO
+//
+//Refactor this code
+
 mod logics;
 
 use logics::{
@@ -8,7 +12,7 @@ use logics::{
 fn main() {
 
     let cards : Vec<Card> = logics::get_random_card_deck();
-    let trump_suit : logics::CardSuit = logics::get_trump_suit(); 
+    let trump_suit : CardSuit = logics::get_random_trump_suit(); 
     
     for card in &cards {
         println!("{:?}", card);
