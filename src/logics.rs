@@ -45,11 +45,7 @@ impl Card {
     pub fn can_beat(&self, compare_to : Card, trump_suit : CardSuit) -> bool {
         if self.is_trump_suit(trump_suit.clone()) {
             if compare_to.is_trump_suit(trump_suit.clone()) {
-                if self.has_higher_weight(compare_to) {
-                    true
-                } else {
-                    false
-                }
+                self.has_higher_weight(compare_to)
             } else {
                 true
             }
@@ -58,11 +54,7 @@ impl Card {
                 false
             } else {
                 if self.is_same_suit(compare_to.clone()) {
-                    if self.has_higher_weight(compare_to.clone()) {
-                        true
-                    } else {
-                        false
-                    }
+                    self.has_higher_weight(compare_to.clone())
                 } else {
                     false
                 }
@@ -73,27 +65,17 @@ impl Card {
     fn has_higher_weight(&self, compare_to : Card) -> bool {
         let card_weight : HashMap<CardValue, u8> = get_card_weight();
 
-        if card_weight.get(&self.value).copied().unwrap() > card_weight.get(&compare_to.value).copied().unwrap() {
-            true
-        } else {
-            false
-        }
+        card_weight.get(&self.value).copied().unwrap() > card_weight.get(&compare_to.value).copied().unwrap()
+
     }
 
     fn is_trump_suit(&self, trump_suit : CardSuit) -> bool {
-        if self.suit == trump_suit {
-            true
-        } else {
-            false
-        }
+        self.suit == trump_suit
     }
 
+
     fn is_same_suit(&self, compare_to : Card) -> bool {
-        if self.suit == compare_to.suit {
-            true
-        } else {
-            false
-        }
+        self.suit == compare_to.suit
     }
 }
 
@@ -144,7 +126,7 @@ pub fn get_random_card_deck() -> Vec<Card> {
     random_card_deck
 }
 
-pub fn get_trump_suit() -> CardSuit {
+pub fn get_random_trump_suit() -> CardSuit {
     let mut rng = rand::rng();
 
     CARD_SUITS[rng.random_range(0..=3)].clone()
