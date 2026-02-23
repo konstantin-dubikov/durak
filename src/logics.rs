@@ -1,6 +1,6 @@
 //TODO 
 //
-//Prevent nesting if possible in can_beat method
+//Remove cloning from here
 
 use rand::prelude::*;
 use std::collections::HashMap;
@@ -43,17 +43,23 @@ impl Card {
     pub fn can_beat(&self, compare_to : &Card, trump_suit : &CardSuit) -> bool {
         if self.is_trump_suit(trump_suit) {
             if compare_to.is_trump_suit(trump_suit) {
-                self.has_higher_weight(compare_to)
-            } else {
-                true
+                return self.has_higher_weight(compare_to);
             }
-        } else {
-            if self.is_same_suit(compare_to) {
-                self.has_higher_weight(compare_to)
-            } else {
-                false
+
+            if !compare_to.is_trump_suit(trump_suit) {
+                return true;
             }
         }
+
+        if !self.is_trump_suit(trump_suit) {
+            if self.is_same_suit(compare_to) {
+                return self.has_higher_weight(compare_to);
+            }
+            if !self.is_same_suit(compare_to) {
+                return false;
+            }
+        }
+        false
     }
 
     fn has_higher_weight(&self, compare_to : &Card) -> bool {
